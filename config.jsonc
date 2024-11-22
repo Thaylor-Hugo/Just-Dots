@@ -94,10 +94,12 @@
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
-            "activated": "",
-            "deactivated": ""
+            "activated": "󰛩",
+            "deactivated": "󰌶"
         },
-        "tooltip": false
+        "tooltip": true,
+        "tooltip-format-activated": "Idle Inhibitor: Activated",
+        "tooltip-format-deactivated": "Idle Inhibitor: Deactivated"
     },
     "tray": {
         "icon-size": 18,
