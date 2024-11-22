@@ -78,18 +78,20 @@
   "tooltip": false
   },
   "pulseaudio": {
-      "format": "{icon}",
-      "format-alt": "{volume} {icon}",
-      "format-alt-click": "click-right",
-      "format-muted": "",
-      "format-icons": {
-          "phone": [" ", " ", " ", " "],
-          "default": ["", "", "", ""]
-      },
-      "scroll-step": 10,
-      "on-click": "pavucontrol",
-      "tooltip": false
-  },
+        "format": "{icon}",
+        "format-bluetooth": "{icon}",
+        "format-muted": "󰸈",
+        "format-icons": {
+            "headphone": [" ", " ", " "],
+            "hands-free": [" ", " ", " "],
+            "headset": [" ", " ", " "],
+            "default": ["", "", ""]
+        },
+        "scroll-step": 5,
+        "on-click": "pavucontrol",
+        "ignored-sinks": ["Easy Effects Sink"],
+        "tooltip": false
+    },
   "custom/spotify": {
       "interval": 1,
       "return-type": "json",
