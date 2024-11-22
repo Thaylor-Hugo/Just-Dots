@@ -5,9 +5,10 @@
 
 import sys
 import subprocess
-from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout, QHBoxLayout, QWidget, QLabel
+from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout, QHBoxLayout, QWidget, QLabel, QSlider
 from PyQt6.QtCore import QEvent, Qt, QRect
 from PyQt6 import QtGui
+from multiprocessing import Process
 
 power_mode_changed = False
 
@@ -23,32 +24,41 @@ class MainWindow(QMainWindow):
 
         # Power profile for AC
         ac_power_profile_layout = QHBoxLayout()
-        self.ac_label = QLabel("AC Power profile:")
-        self.ac_label.setStyleSheet("font-weight: bold; color: white;")
-        self.ac_button = PowerButton(power_source="AC")
-        ac_power_profile_layout.addWidget(self.ac_label)
-        ac_power_profile_layout.addWidget(self.ac_button)
+        ac_label = QLabel("AC Power profile:")
+        ac_label.setStyleSheet("font-weight: bold; color: white;")
+        ac_button = PowerButton(power_source="AC")
+        ac_power_profile_layout.addWidget(ac_label)
+        ac_power_profile_layout.addWidget(ac_button)
 
         # Power profile for BAT
         bat_power_profile_layout = QHBoxLayout()
-        self.bat_label = QLabel("BAT Power profile:")
-        self.bat_label.setStyleSheet("font-weight: bold; color: white;")
-        self.bat_button = PowerButton(power_source="BAT")
-        bat_power_profile_layout.addWidget(self.bat_label)
-        bat_power_profile_layout.addWidget(self.bat_button)
+        bat_label = QLabel("BAT Power profile:")
+        bat_label.setStyleSheet("font-weight: bold; color: white;")
+        bat_button = PowerButton(power_source="BAT")
+        bat_power_profile_layout.addWidget(bat_label)
+        bat_power_profile_layout.addWidget(bat_button)
 
         # Conservation mode switch
         conservation_mode_layout = QHBoxLayout()
-        self.switch_label = QLabel("Conservation Mode:")
-        self.switch_label.setStyleSheet("font-weight: bold; color: white;")
-        self.switch = ConservativeModeSwitch()
-        conservation_mode_layout.addWidget(self.switch_label)
-        conservation_mode_layout.addWidget(self.switch)
+        switch_label = QLabel("Conservation Mode:")
+        switch_label.setStyleSheet("font-weight: bold; color: white;")
+        switch = ConservativeModeSwitch()
+        conservation_mode_layout.addWidget(switch_label)
+        conservation_mode_layout.addWidget(switch)
+
+        # Brightness slider
+        brightness_slider = BrightnessSlider()
+        brightness_label = QLabel("Brightness:")
+        brightness_label.setStyleSheet("font-weight: bold; color: white;")
+        brightness_layout = QHBoxLayout()
+        brightness_layout.addWidget(brightness_label)
+        brightness_layout.addWidget(brightness_slider)
 
         # Add layouts to main layout
         main_layout.addLayout(ac_power_profile_layout)
         main_layout.addLayout(bat_power_profile_layout)
         main_layout.addLayout(conservation_mode_layout)
+        main_layout.addLayout(brightness_layout)
 
         # Set central widget
         central_widget = QWidget()
@@ -172,7 +182,25 @@ class ConservativeModeSwitch(QPushButton):
             subprocess.run("sudo /usr/local/bin/battery_windows_bar/full_charge.sh", shell=True, capture_output=True, text=True)
 
 
+class BrightnessSlider(QSlider):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setOrientation(Qt.Orientation.Horizontal)
+        self.setRange(0, self.get_max_brightness())
+        self.setValue(self.get_brightness())
+        self.valueChanged.connect(self.slider_changed)
+    
+    def get_max_brightness(self):
+        return int(subprocess.run("brightnessctl max", shell=True, capture_output=True, text=True).stdout.strip())
+
+    def get_brightness(self):
+        return int(subprocess.run("brightnessctl get", shell=True, capture_output=True, text=True).stdout.strip())
+    
+    def slider_changed(self, value):
+        subprocess.run("brightnessctl set "+str(value), shell=True, capture_output=True, text=True)
+
 if __name__ == "__main__":
+    # print(Process.name)
     app = QApplication(sys.argv)
     window = MainWindow()
     window.show()
