@@ -71,9 +71,10 @@
           "wifi": ["󰤟", "󰤢" ,"󰤨"],
           "ethernet": [""],
           "disconnected": ["󰤯"],
-          "off": ["󰤭"]
+          "disabled": ["󰤭"]
       },
-      "on-click": "termite -e nmtui",
+      "format-off": "󰤭",
+      "on-click": "~/.config/waybar/scripts/rofi_wifi/rofi-wifi-menu.sh",
   "tooltip": false
   },
   "pulseaudio": {
