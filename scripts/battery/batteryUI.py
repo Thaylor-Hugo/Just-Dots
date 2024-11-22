@@ -1,7 +1,7 @@
 # Necessary to give the battery scripts execution permission without sudo
 # check for details: https://askubuntu.com/questions/155791/how-do-i-sudo-a-command-in-a-script-without-being-asked-for-a-password
 # Note: There might be a file /etc/sudoers.d/10-installer that overwrite the NOPASSWD option, so you might need to remove it
-
+#Note2: It might be safer to install the battery scripts in /usr/local/bin and give them the necessary permissions and ownership to root
 
 import sys
 import subprocess
@@ -76,7 +76,7 @@ class MainWindow(QMainWindow):
     def closeEvent(self, *args, **kwargs):
         super().closeEvent(*args, **kwargs)
         if power_mode_changed:
-            subprocess.run("sudo ~/.config/waybar/scripts/battery/restart_tlp.sh", shell=True, capture_output=True, text=True)
+            subprocess.run("sudo /usr/local/bin/battery_windows_bar/restart_tlp.sh", shell=True, capture_output=True, text=True)
 
 
 class PowerButton(QPushButton):
@@ -122,7 +122,7 @@ class PowerButton(QPushButton):
         self.current_power_profile = self.power_profiles[index]
         self.setText(self.power_profiles_formatted[self.current_power_profile])
         self.setStyleSheet(self.profile_colors[self.current_power_profile])
-        subprocess.run("sudo ~/.config/waybar/scripts/battery/change_power_mode.sh "+self.power_source+" "+last_power_profile+" "+self.current_power_profile, shell=True, capture_output=True, text=True)
+        subprocess.run("sudo /usr/local/bin/battery_windows_bar/change_power_mode.sh "+self.power_source+" "+last_power_profile+" "+self.current_power_profile, shell=True, capture_output=True, text=True)
 
 
 class ConservativeModeSwitch(QPushButton):
@@ -167,9 +167,9 @@ class ConservativeModeSwitch(QPushButton):
     
     def switch_toggled(self, checked):
         if checked:
-            subprocess.run("sudo ~/.config/waybar/scripts/battery/battery_life.sh", shell=True, capture_output=True, text=True)
+            subprocess.run("sudo /usr/local/bin/battery_windows_bar/battery_life.sh", shell=True, capture_output=True, text=True)
         else:
-            subprocess.run("sudo ~/.config/waybar/scripts/battery/full_charge.sh", shell=True, capture_output=True, text=True)
+            subprocess.run("sudo /usr/local/bin/battery_windows_bar/full_charge.sh", shell=True, capture_output=True, text=True)
 
 
 if __name__ == "__main__":
