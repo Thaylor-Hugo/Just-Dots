@@ -5,7 +5,7 @@
 
     "modules-left": ["hyprland/workspaces", "hyprland/submap"],
     "modules-center": ["hyprland/window"],
-    "modules-right": ["tray","idle_inhibitor", "pulseaudio", "network", "battery", "clock"],
+    "modules-right": ["tray","idle_inhibitor", "custom/webcam", "privacy", "custom/microphone", "pulseaudio", "network", "battery", "clock"],
     "hyprland/submap": {
         "format": " {}"
     },
@@ -90,6 +90,38 @@
         "on-click": "pavucontrol",
         "ignored-sinks": ["Easy Effects Sink"],
         "tooltip": false
+    },
+    "custom/microphone": {
+        "exec": "~/.config/waybar/scripts/privacy/microphone_disable.sh",
+        "interval": 2,
+        "return-type": "json"
+    },
+    "privacy": {
+        "icon-spacing": 5,
+        "icon-size": 15,
+        "transition-duration": 250,
+        "modules": [
+            {
+                "type": "screenshare",
+                "tooltip": true,
+                "tooltip-icon-size": 24
+            },
+            {
+                "type": "audio-out",
+                "tooltip": true,
+                "tooltip-icon-size": 24
+            },
+            {
+                "type": "audio-in",
+                "tooltip": true,
+                "tooltip-icon-size": 24
+            }
+        ]
+    },
+    "custom/webcam": {
+        "exec": "~/.config/waybar/scripts/privacy/camera_use.sh",
+        "interval": 2,
+        "return-type": "json"
     },
     "idle_inhibitor": {
         "format": "{icon}",

@@ -66,6 +66,10 @@ window#waybar.solo {
     color:      rgba(217, 216, 216, 1);
 }
 
+#custom.microphone {
+    font-size: 50px;
+}
+
 #custom-storage.warning {
     color:      rgba(255, 210, 4, 1);
 }
