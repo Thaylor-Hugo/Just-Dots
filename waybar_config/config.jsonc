@@ -1,0 +1,140 @@
+{
+    "layer": "bottom",
+    "position": "top",
+    "height": 20,
+
+    "modules-left": ["hyprland/workspaces", "hyprland/submap"],
+    "modules-center": ["hyprland/window"],
+    "modules-right": ["tray","idle_inhibitor", "custom/webcam", "privacy", "custom/microphone", "pulseaudio", "network", "battery", "clock"],
+    "hyprland/submap": {
+        "format": " {}"
+    },
+    "hyprland/workspaces": {
+        "format": "{name}",
+        "disable-scroll": true
+    },
+    "hyprland/window": {
+        "format": "{initialTitle}",
+        "rewrite": {
+            "Mozilla Firefox": "🦊 Mozilla Firefox",
+            "kitty": "🐱 Kitty",
+            "Visual Studio Code": "💻 Visual Studio Code"
+        },
+        "max-length": 80,
+        "tooltip": false
+    },
+    "clock": {
+        "format": "{:%a %d %b %H:%M}",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+            "calendar": {
+                "mode"          : "year",
+                "mode-mon-col"  : 3,
+                "weeks-pos"     : "right",
+                "on-scroll"     : 1,
+                "format": {
+                    "months":     "<span color='#ffead3'><b>{}</b></span>",
+                    "days":       "<span color='#ecc6d9'><b>{}</b></span>",
+                    "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
+                    "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
+                    "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+                }
+            },
+            "actions":  {
+                "on-click-right": "mode",
+                "on-scroll-up": "shift_up",
+                "on-scroll-down": "shift_down"
+            }
+    }, 
+    "battery": {
+        "interval": 1,
+        "tooltip": true,
+        "states": {
+            "warning": 25,
+            "critical": 15,
+            "dead": 5
+        },
+        "format": "{capacity}% {icon}",
+        "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+        "format-full": "{capacity}% 󰂄",
+        "format-not-charging": "{capacity}% 󰂄",
+        "format-charging": "{capacity}% {icon}󱐋",
+        "format-warning": "{capacity}% {icon}",
+        "format-critical": "{capacity}% {icon}!",
+        "format-dead": "{capacity}% 󱉞",
+        "on-click": "python3 ~/.config/waybar/scripts/battery/batteryUI.py"
+    },
+    "network": {
+        "format": "{icon}",
+        "format-alt": "{ipaddr}/{cidr} {icon}",
+        "format-alt-click": "click-right",
+        "format-icons": {
+            "wifi": ["󰤟", "󰤢" ,"󰤨"],
+            "ethernet": [""],
+            "disconnected": ["󰤯"],
+            "disabled": ["󰤭"]
+        },
+        "format-off": "󰤭",
+        "on-click": "~/.config/waybar/scripts/rofi_wifi/rofi-wifi-menu.sh",
+    "tooltip": false
+    },
+    "pulseaudio": {
+        "format": "{icon}",
+        "format-muted": "󰸈",
+        "format-icons": {
+            "headphone": [" ", " ", " "],
+            "hands-free": [" ", " ", " "],
+            "headset": [" ", " ", " "],
+            "default": ["", "", ""]
+        },
+        "scroll-step": 5,
+        "on-click": "pavucontrol",
+        "ignored-sinks": ["Easy Effects Sink"],
+        "tooltip": false
+    },
+    "custom/microphone": {
+        "exec": "~/.config/waybar/scripts/privacy/microphone_disable.sh",
+        "interval": 2,
+        "return-type": "json"
+    },
+    "privacy": {
+        "icon-spacing": 5,
+        "icon-size": 15,
+        "transition-duration": 250,
+        "modules": [
+            {
+                "type": "screenshare",
+                "tooltip": true,
+                "tooltip-icon-size": 24
+            },
+            {
+                "type": "audio-out",
+                "tooltip": true,
+                "tooltip-icon-size": 24
+            },
+            {
+                "type": "audio-in",
+                "tooltip": true,
+                "tooltip-icon-size": 24
+            }
+        ]
+    },
+    "custom/webcam": {
+        "exec": "~/.config/waybar/scripts/privacy/camera_use.sh",
+        "interval": 2,
+        "return-type": "json"
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "󰛩",
+            "deactivated": "󰌶"
+        },
+        "tooltip": true,
+        "tooltip-format-activated": "Idle Inhibitor: Activated",
+        "tooltip-format-deactivated": "Idle Inhibitor: Deactivated"
+    },
+    "tray": {
+        "icon-size": 18,
+        "show-passive-items": true
+    }
+}
