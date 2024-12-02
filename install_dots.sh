@@ -27,6 +27,8 @@ sudo chmod 700 /usr/local/bin/change_power_mode.sh
 sudo chmod 700 /usr/local/bin/full_charge.sh
 sudo chmod 700 /usr/local/bin/restart_tlp.sh
 
+sudo cp ~/Just-Dots/waybar/scripts/batterybattery_scripts_no_password /etc/sudoers.d/battery_scripts_no_password
+
 # Create a symbolic link to the dotfiles
 mv -f ~/.config/waybar ~/.config/waybar_old
 mv -f ~/.config/hypr ~/.config/hypr_old
