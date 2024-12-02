@@ -28,7 +28,12 @@ sudo chmod 700 /usr/local/bin/full_charge.sh
 sudo chmod 700 /usr/local/bin/restart_tlp.sh
 
 # Create a symbolic link to the dotfiles
-ln -sf ~/Just-Dots/waybar ~/.config/waybar
-ln -sf ~/Just-Dots/hypr ~/.config/hypr
+mv -f ~/.config/waybar ~/.config/waybar_old
+mv -f ~/.config/hypr ~/.config/hypr_old
+mv -f ~/.zshrc ~/.zshrc_old
+mv -f ~/.oh-my-zsh/custom/themes/just_theme.zsh-theme ~/.oh-my-zsh/custom/themes/just_theme.zsh-theme_old
+
+ln -sf ~/Just-Dots/waybar ~/.config/
+ln -sf ~/Just-Dots/hypr ~/.config/
 ln -sf ~/Just-Dots/.zshrc ~/.zshrc
 ln -sf ~/Just-Dots/.oh-my-zsh/custom/themes/just_theme.zsh-theme ~/.oh-my-zsh/custom/themes/just_theme.zsh-theme
