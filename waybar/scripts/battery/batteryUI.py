@@ -86,7 +86,7 @@ class MainWindow(QMainWindow):
     def closeEvent(self, *args, **kwargs):
         super().closeEvent(*args, **kwargs)
         if power_mode_changed:
-            subprocess.run("sudo /usr/local/bin/battery_windows_bar/restart_tlp.sh", shell=True, capture_output=True, text=True)
+            subprocess.run("sudo /usr/local/bin/restart_tlp.sh", shell=True, capture_output=True, text=True)
 
 
 class PowerButton(QPushButton):
@@ -132,7 +132,7 @@ class PowerButton(QPushButton):
         self.current_power_profile = self.power_profiles[index]
         self.setText(self.power_profiles_formatted[self.current_power_profile])
         self.setStyleSheet(self.profile_colors[self.current_power_profile])
-        subprocess.run("sudo /usr/local/bin/battery_windows_bar/change_power_mode.sh "+self.power_source+" "+last_power_profile+" "+self.current_power_profile, shell=True, capture_output=True, text=True)
+        subprocess.run("sudo /usr/local/bin/change_power_mode.sh "+self.power_source+" "+last_power_profile+" "+self.current_power_profile, shell=True, capture_output=True, text=True)
 
 
 class ConservativeModeSwitch(QPushButton):
@@ -177,9 +177,9 @@ class ConservativeModeSwitch(QPushButton):
     
     def switch_toggled(self, checked):
         if checked:
-            subprocess.run("sudo /usr/local/bin/battery_windows_bar/battery_life.sh", shell=True, capture_output=True, text=True)
+            subprocess.run("sudo /usr/local/bin/battery_life.sh", shell=True, capture_output=True, text=True)
         else:
-            subprocess.run("sudo /usr/local/bin/battery_windows_bar/full_charge.sh", shell=True, capture_output=True, text=True)
+            subprocess.run("sudo /usr/local/bin/full_charge.sh", shell=True, capture_output=True, text=True)
 
 
 class BrightnessSlider(QSlider):
