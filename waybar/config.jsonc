@@ -5,7 +5,7 @@
 
     "modules-left": ["hyprland/workspaces", "hyprland/submap"],
     "modules-center": ["hyprland/window"],
-    "modules-right": ["tray","idle_inhibitor", "custom/webcam", "privacy", "custom/microphone", "pulseaudio", "network", "battery", "clock"],
+    "modules-right": ["tray","idle_inhibitor", "custom/webcam", "privacy", "custom/microphone", "pulseaudio", "network", "battery", "clock", "custom/powermenu"],
     "hyprland/submap": {
         "format": " {}"
     },
@@ -22,6 +22,11 @@
         },
         "max-length": 80,
         "tooltip": false
+    },
+    "custom/powermenu": {
+        "tooltip": false,
+        "format": " ",
+        "on-click": "bash $HOME/.config/waybar/scripts/poweroff.sh"
     },
     "clock": {
         "format": "{:%a %d %b %H:%M}",
