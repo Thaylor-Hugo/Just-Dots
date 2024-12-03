@@ -126,7 +126,7 @@ path+=('/home/thaylor/STM/Cube/STM32CubeProgrammer/bin')
 
 export PATH
 
-if [[ -v ${CONTAINER_ID} ]]; then
+if [[ -v CONTAINER_ID ]]; then
     # ROS2
     source /opt/ros/jazzy/setup.zsh
     eval "$(register-python-argcomplete ros2)"
