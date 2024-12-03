@@ -118,10 +118,6 @@ source $ZSH/oh-my-zsh.sh
 
 alias code="code $1 --ozone-platform=wayland"
 
-if [[ -v ${CONTAINER_ID} ]]; then
-
-fi
-
 alias cubemx="~/STM/Cube/STM32CubeMX/STM32CubeMX"
 
 export CUBE_PATH="/home/thaylor/STM/Cube/STM32CubeMX"
@@ -130,8 +126,9 @@ path+=('/home/thaylor/STM/Cube/STM32CubeProgrammer/bin')
 
 export PATH
 
-# ROS2
-
-source /opt/ros/jazzy/setup.zsh
-eval "$(register-python-argcomplete ros2)"
-eval "$(register-python-argcomplete colcon)"
+if [[ -v ${CONTAINER_ID} ]]; then
+    # ROS2
+    source /opt/ros/jazzy/setup.zsh
+    eval "$(register-python-argcomplete ros2)"
+    eval "$(register-python-argcomplete colcon)"
+fi
