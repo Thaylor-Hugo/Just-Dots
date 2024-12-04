@@ -1,19 +1,19 @@
 #!/bin/bash
 
-# Change the hyprpaper wallpaper to the next wallpaper in the wallpapers directory
-# Uses the hyprpaper.conf file to keep track of the current wallpaper
+# Changes the current wallpaper link for the next wallpaper in the wallpapers directory
+# Uses link to auto update the wallpaper and lockscreen
 
-hyprpaper_conf="$HOME/.config/hypr/hyprpaper.conf"
+current_wallpaper=$HOME/.config/hypr/wallpapers/current_wallpaper.link
 
-wallpapers=($(ls $HOME/.config/hypr/wallpapers/*)) 
+wallpapers=($(ls $HOME/.config/hypr/wallpapers/*.jpg)) 
 
-last_wallpaper=$(grep "preload" "$hyprpaper_conf" | cut -d'=' -f2 | tr -d ' ')
+real_wallpaper=$(readlink $current_wallpaper)
 
 # Get the index of the current wallpaper
 index=-1
 
 for i in "${!wallpapers[@]}"; do
-    if [[ "${wallpapers[i]}" == "$last_wallpaper" ]]; then
+    if [[ "${wallpapers[i]}" == "$real_wallpaper" ]]; then
         index=$i
         break
     fi
@@ -21,14 +21,12 @@ done
 
 # Set next wallpaper
 next_index=$(( (index + 1) % ${#wallpapers[@]} ))
-
 next_wallpaper="${wallpapers[next_index]}"
 
-# Update the hyprpaper.conf file
-sed -i "s|preload = .*|preload = $next_wallpaper|" "$hyprpaper_conf"
-sed -i "s|wallpaper = , .*|wallpaper = , $next_wallpaper|" "$hyprpaper_conf"
+# Update the link
+ln -sf $next_wallpaper $current_wallpaper
 
-# Change the wallpaper
+# Reload hyprpaper
 hyprctl hyprpaper unload all
-hyprctl hyprpaper preload $next_wallpaper
-hyprctl hyprpaper wallpaper ", $next_wallpaper"
+hyprctl hyprpaper preload $current_wallpaper
+hyprctl hyprpaper wallpaper ", $current_wallpaper"
