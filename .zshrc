@@ -120,6 +120,8 @@ alias code="code $1 --ozone-platform=wayland"
 
 alias cubemx="~/STM/Cube/STM32CubeMX/STM32CubeMX"
 
+alias quartus="~/intelFPGA_lite/20.1/quartus/bin/quartus"
+
 export CUBE_PATH="/home/thaylor/STM/Cube/STM32CubeMX"
 
 path+=('/home/thaylor/STM/Cube/STM32CubeProgrammer/bin')
