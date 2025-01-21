@@ -73,7 +73,7 @@ ZSH_THEME="just_theme"
 plugins=(
         git
         colored-man-pages
-        colorize                # Not working?
+        colorize
         command-not-found
         docker
         docker-compose
@@ -121,6 +121,10 @@ alias code="code $1 --ozone-platform=wayland"
 alias cubemx="~/STM/Cube/STM32CubeMX/STM32CubeMX"
 
 alias quartus="~/intelFPGA_lite/20.1/quartus/bin/quartus"
+alias modelsim="~/intelFPGA_lite/20.1/modelsim_ase/bin/vsim"
+
+alias cat="ccat" # cat with color
+alias less="cless" # less with color
 
 export CUBE_PATH="/home/thaylor/STM/Cube/STM32CubeMX"
 
@@ -134,3 +138,5 @@ if [[ -v CONTAINER_ID ]]; then
     eval "$(register-python-argcomplete ros2)"
     eval "$(register-python-argcomplete colcon)"
 fi
+
+~/Just-Dots/.oh-my-zsh/custom/themes/welcome.sh
