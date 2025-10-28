@@ -26,3 +26,6 @@
 * hypridle: idle management
 * hyprlock: lock screen
 * blueman: bluetooth
+* brightnessctl
+* waybar
+* ttf-hack-nerd
