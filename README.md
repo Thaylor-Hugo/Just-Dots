@@ -2,6 +2,8 @@
 
 This repository contains my personal dotfiles and configuration files for the Hyprland ecosystem, Waybar, and Zsh.
 
+Updated for clean CachyOS install with no default DE.
+
 ## Contents
 
 - **hypr**: Configuration files for the [Hyprland](https://github.com/hyprwm/Hyprland) window manager.
