@@ -8,14 +8,16 @@
     transition-duration: 0s;
 }
 
-window {
-    color:      rgba(217, 216, 216, 1);
+window#waybar {
     background: rgba(35, 31, 32, 0.85);
+    border-bottom: 2px solid rgba(108, 118, 126, 0.5);
+    color: white;
 }
 
-window#waybar.solo {
-    color:      rgba(217, 216, 216, 1);
-    background: rgba(35, 31, 32, 0.85);
+tooltip {
+    background: rgba(43, 48, 59, 0.75);
+    border: 1px solid rgba(100, 114, 125, 0.5);
+    border-radius: 15;
 }
 
 #workspaces {
@@ -23,12 +25,18 @@ window#waybar.solo {
 }
 
 #workspaces button {
-    padding:    0 5px;
     color:      rgba(217, 216, 216, 0.4);
 }
 
 #workspaces button.visible {
     color:      rgba(217, 216, 216, 1);
+}
+
+#workspaces button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: rgba(217, 216, 216, 1);
+    border-radius: 4px;
+    transition: background 120ms ease, color 120ms ease;
 }
 
 #workspaces button.focused {
@@ -40,14 +48,50 @@ window#waybar.solo {
     color:      rgba(238, 46, 36, 1);
 }
 
-#mode, #battery, #cpu, #memory, #network, #pulseaudio, #idle_inhibitor, #backlight, #custom-storage, #custom-spotify, #custom-weather, #custom-mail {
-    margin:     0px 6px 0px 10px;
+#mode, #custom-powermenu, #clock, #battery, #power-profiles-daemon, #network, #pulseaudio, #privacy, #custom-webcam, #custom-microphone, #idle_inhibitor, #tray {
     min-width:  25px;
 }
 
+/* Hover styling for top-level modules (change color/background when pointer is over them) */
+#mode:hover, #custom-powermenu:hover, #clock:hover, #battery:hover, #power-profiles-daemon:hover, #network:hover, #pulseaudio:hover, #privacy:hover, #custom-webcam:hover, #custom-microphone:hover, #idle_inhibitor:hover, #tray:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: rgba(217, 216, 216, 1);
+    border-radius: 4px;
+    transition: background 120ms ease, color 120ms ease;
+}
+
+#custom-powermenu {
+    padding-left: 5px;
+}
+
 #clock {
-    margin:     0px 16px 0px 10px;
-    min-width:  140px;
+    min-width:  160px;
+}
+
+#power-profiles-daemon.performance {
+    color: #e45b5b;
+    padding-left: 4px;
+    padding-right: 3px;
+}
+
+#power-profiles-daemon.balanced {
+    color: #27c0e6;
+    padding-right: 7px;
+}
+
+#power-profiles-daemon.power-saver {
+    color: #09b526;
+    padding-left: 1px;
+    padding-right: 6px;
+}
+
+#idle_inhibitor {
+    padding-left: 5px;
+}
+
+#battery {
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 #battery.warning {
@@ -66,14 +110,24 @@ window#waybar.solo {
     color:      rgba(217, 216, 216, 1);
 }
 
-#custom.microphone {
-    font-size: 50px;
+#network {
+    padding-left: 5px;
 }
 
-#custom-storage.warning {
-    color:      rgba(255, 210, 4, 1);
+#pulseaudio {
+    padding-right: 5px;
 }
 
-#custom-storage.critical {
-    color:      rgba(238, 46, 36, 1);
+#custom-microphone {
+    font-size: 20px;
+}
+
+#privacy {
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+#custom-webcam {
+    font-size: 20px;
+    padding-right: 3px;
 }
