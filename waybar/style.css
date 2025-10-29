@@ -125,6 +125,7 @@ tooltip {
 #privacy {
     padding-right: 5px;
     padding-left: 5px;
+    color: rgba(255, 210, 4, 1);
 }
 
 #custom-webcam {
