@@ -29,3 +29,5 @@
 * brightnessctl
 * waybar
 * ttf-hack-nerd
+* fortune-mod
+* python-pygments
