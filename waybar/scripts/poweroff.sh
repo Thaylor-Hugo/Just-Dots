@@ -1,14 +1,17 @@
-#!/bin/bash
-case $(wofi -d -L 6 -l 3 -W 100 -x -100 -y 10 \
-    -D dynamic_lines=true << EOF | sed 's/^ *//'
-    Shutdown
-    Reboot
-    Log off
-    Sleep
-    Lock
-    Cancel
-EOF
-) in
+#!/usr/bin/env bash
+# Use walker in dmenu mode as a replacement for wofi.
+# walker reads newline-separated options from stdin and prints the
+# selected option to stdout.
+
+choice=$(printf '%s\n' \
+    "Shutdown" \
+    "Reboot" \
+    "Log off" \
+    "Sleep" \
+    "Lock" \
+    "Cancel" | walker -d --width 40 --height 8)
+
+case "${choice}" in
     "Shutdown")
         systemctl poweroff
         ;;

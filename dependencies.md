@@ -17,7 +17,7 @@
     - ibus: input bus
 * hyprpolkitagent
 * qt5-wayland and qt6-wayland
-* wofi: menu
+* walker: menu
 * pipewire and wireplumber
 * xdg-desktop-portal-hyprland
 * xdg-desktop-portal-gtk
@@ -31,3 +31,4 @@
 * ttf-hack-nerd
 * fortune-mod
 * python-pygments
+* elephant
