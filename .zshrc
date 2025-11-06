@@ -120,8 +120,8 @@ alias code="code $1 --ozone-platform=wayland"
 
 alias cubemx="~/STM/Cube/STM32CubeMX/STM32CubeMX"
 
-alias quartus="~/intelFPGA_lite/20.1/quartus/bin/quartus"
-alias modelsim="~/intelFPGA_lite/20.1/modelsim_ase/bin/vsim"
+# alias quartus="~/intelFPGA_lite/20.1/quartus/bin/quartus"
+# alias modelsim="~/intelFPGA_lite/20.1/modelsim_ase/bin/vsim"
 
 alias cat="ccat" # cat with color
 alias less="cless" # less with color
@@ -140,3 +140,4 @@ if [[ -v CONTAINER_ID ]]; then
 fi
 
 ~/Just-Dots/.oh-my-zsh/custom/themes/welcome.sh
+export QSYS_ROOTDIR="/home/thaylor/.cache/yay/quartus-free/pkg/quartus-free-quartus/opt/intelFPGA/24.1/quartus/sopc_builder/bin"
