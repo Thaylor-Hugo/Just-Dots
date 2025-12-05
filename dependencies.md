@@ -32,3 +32,4 @@
 * fortune-mod
 * python-pygments
 * elephant
+* nwg-displays
