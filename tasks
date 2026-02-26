@@ -7,3 +7,7 @@
 7- limit battery charge?
 8- make a simple calendar
 9- make a simple wifi app
+
+
+note: getty to auto login
+zprofile to start hyprland on tty1
