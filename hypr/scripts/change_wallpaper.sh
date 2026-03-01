@@ -27,6 +27,4 @@ next_wallpaper="${wallpapers[next_index]}"
 ln -sf $next_wallpaper $current_wallpaper
 
 # Reload hyprpaper
-hyprctl hyprpaper unload all
-hyprctl hyprpaper preload $current_wallpaper
-hyprctl hyprpaper wallpaper ", $current_wallpaper"
+hyprctl hyprpaper wallpaper ", $current_wallpaper, cover"
