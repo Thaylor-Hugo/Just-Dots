@@ -12,6 +12,7 @@ local fileManager = "nautilus"
 local menu = "walker"
 
 hl.on("hyprland.start", function()
+  hl.exec_cmd("systemctl --user start hyprland-session.target")
   hl.exec_cmd("ibus-daemon -rxRd")
   hl.exec_cmd("systemctl --user start hyprpolkitagent")
   hl.exec_cmd("hyprpaper")
@@ -30,6 +31,10 @@ hl.on("hyprland.start", function()
 
   hl.exec_cmd('gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"')
   hl.exec_cmd('gsettings set org.gnome.desktop.interface gtk-theme "adw-gtk3"')
+end)
+
+hl.on("hyprland.shutdown", function()
+  hl.exec_cmd("systemctl --user stop hyprland-session.target")
 end)
 
 hl.env("QT_QPA_PLATFORMTHEME", "qt6ct")

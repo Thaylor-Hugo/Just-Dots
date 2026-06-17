@@ -34,8 +34,12 @@ mv -f ~/.config/waybar ~/.config/waybar_old
 mv -f ~/.config/hypr ~/.config/hypr_old
 mv -f ~/.zshrc ~/.zshrc_old
 mv -f ~/.oh-my-zsh/custom/themes/just_theme.zsh-theme ~/.oh-my-zsh/custom/themes/just_theme.zsh-theme_old
+mkdir -p ~/.config/systemd/user
+mv -f ~/.config/systemd/user/hyprland-session.target ~/.config/systemd/user/hyprland-session.target_old
 
 ln -sf ~/Just-Dots/waybar ~/.config/
 ln -sf ~/Just-Dots/hypr ~/.config/
 ln -sf ~/Just-Dots/.zshrc ~/.zshrc
 ln -sf ~/Just-Dots/.oh-my-zsh/custom/themes/just_theme.zsh-theme ~/.oh-my-zsh/custom/themes/just_theme.zsh-theme
+ln -sf ~/Just-Dots/systemd/user/hyprland-session.target ~/.config/systemd/user/hyprland-session.target
+

@@ -1,0 +1,8 @@
+[Unit]
+Description=Hyprland Session
+BindsTo=graphical-session.target
+Wants=graphical-session-pre.target
+After=graphical-session-pre.target
+Before=graphical-session.target
+PropagatesReloadTo=graphical-session.target
+RefuseManualStart=no
