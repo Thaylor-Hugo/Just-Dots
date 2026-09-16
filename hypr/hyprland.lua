@@ -17,10 +17,10 @@ hl.on("hyprland.start", function()
   hl.exec_cmd("systemctl --user start hyprpolkitagent")
   hl.exec_cmd("hyprpaper")
   hl.exec_cmd("~/.config/hypr/scripts/change_wallpaper.sh")
+  hl.exec_cmd("~/.config/hypr/scripts/display_mode.sh init")
   hl.exec_cmd("hypridle")
   hl.exec_cmd("mako")
   hl.exec_cmd("waybar")
-  hl.exec_cmd("setxkbmap -model abnt2 -layout br -variant thinkpad")
   hl.exec_cmd("blueman-applet")
   hl.exec_cmd("sleep 0.9 && (pidof hyprlock || hyprlock)")
   hl.exec_cmd("wl-paste --type text --watch cliphist store")
@@ -100,8 +100,8 @@ hl.config({
     vfr = true,
   },
   input = {
-    kb_layout = "br",
-    kb_variant = "thinkpad",
+    kb_layout = "us",
+    kb_variant = "intl",
     follow_mouse = 2,
     sensitivity = 0,
     numlock_by_default = true,
@@ -126,6 +126,13 @@ hl.config({
       },
     },
   },
+})
+
+hl.device({
+  name = "at-translated-set-2-keyboard",
+  kb_model = "abnt2",
+  kb_layout = "br",
+  kb_variant = "thinkpad",
 })
 
 hl.curve("myBezier", { type = "bezier", points = { { 0.05, 0.9 }, { 0.1, 1.05 } } })

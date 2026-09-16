@@ -4,7 +4,7 @@ local fileManager = "nautilus"
 local menu = "walker"
 
 hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))
-hl.bind(mainMod .. " + C", hl.dsp.window.kill())
+hl.bind(mainMod .. " + C", hl.dsp.window.close())
 hl.bind(mainMod .. " + M", hl.dsp.exit())
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
@@ -13,6 +13,7 @@ hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen())
 hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("pidof hyprlock || hyprlock"))
+hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd("$HOME/.config/hypr/scripts/display_mode.sh"), { locked = true })
 hl.bind("ALT + F4", hl.dsp.exec_cmd("$HOME/.config/waybar/scripts/poweroff.sh"))
 hl.bind("SUPER + CTRL + V", hl.dsp.exec_cmd("cliphist list | walker -d | cliphist decode | wl-copy"))
 hl.bind("SUPER + CTRL + SHIFT + V", hl.dsp.exec_cmd("cliphist list | walker -d | cliphist delete"))
