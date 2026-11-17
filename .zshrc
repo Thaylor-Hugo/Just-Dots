@@ -129,6 +129,7 @@ alias less="cless" # less with color
 export CUBE_PATH="/home/thaylor/STM/Cube/STM32CubeMX"
 
 path+=('/home/thaylor/STM/Cube/STM32CubeProgrammer/bin')
+path+=('/home/thaylor/.local/bin')
 
 export PATH
 
