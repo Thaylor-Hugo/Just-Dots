@@ -26,6 +26,7 @@ Updated for clean CachyOS install with no default DE.
 
 ## Dependencies
 
+- **Just-Wifi-Menu**: Custom Wi-Fi menu for Waybar/Hyprland ([Thaylor-Hugo/Just-Wifi-Menu](https://github.com/Thaylor-Hugo/Just-Wifi-Menu)), automatically cloned and installed by `install_dots.sh` (requires `gtk4`, `gtk4-layer-shell`, `networkmanager`, and `rust`/`cargo` to build).
 - `python-pyqt6`: Required for the Waybar battery UI (`waybar/scripts/battery/batteryUI.py`).
     ```sh
     sudo pacman -S --asexplicit python-pyqt6

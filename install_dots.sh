@@ -43,3 +43,10 @@ ln -sf ~/Just-Dots/.zshrc ~/.zshrc
 ln -sf ~/Just-Dots/.oh-my-zsh/custom/themes/just_theme.zsh-theme ~/.oh-my-zsh/custom/themes/just_theme.zsh-theme
 ln -sf ~/Just-Dots/systemd/user/hyprland-session.target ~/.config/systemd/user/hyprland-session.target
 
+# Install Just-Wifi-Menu
+WIFI_TMP_DIR="/tmp/Just-Wifi-Menu"
+rm -rf "$WIFI_TMP_DIR"
+git clone https://github.com/Thaylor-Hugo/Just-Wifi-Menu.git "$WIFI_TMP_DIR"
+(cd "$WIFI_TMP_DIR" && cargo build --release --locked && sudo install -Dm755 target/release/Just-Wifi-Menu /usr/local/bin/just-wifi-menu)
+rm -rf "$WIFI_TMP_DIR"
+

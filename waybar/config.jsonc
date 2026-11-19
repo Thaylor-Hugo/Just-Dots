@@ -76,7 +76,7 @@
             "disabled": ["󰤭 "]
         },
         "format-off": "󰤭 ",
-        "on-click": "~/.config/waybar/scripts/rofi_wifi/rofi-wifi-menu.sh",
+        "on-click": "pkill -x just-wifi-menu || pkill -x Just-Wifi-Menu || just-wifi-menu gui --anchor top-right --margin-top 10 --margin-right 10",
         "tooltip": true,
         "tooltip-format-wifi": "{essid}",
         "tooltip-format-ethernet": "{ifname}",
