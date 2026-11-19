@@ -12,6 +12,7 @@
     },
     "hyprland/workspaces": {
         "format": "{name}",
+        "on-click": "activate",
         "disable-scroll": true
     },
     "hyprland/window": {
@@ -52,7 +53,8 @@
         "format-charging": "{capacity}% {icon}󱐋",
         "format-warning": "{capacity}% {icon} ",
         "format-critical": "{capacity}% {icon}!",
-        "format-dead": "{capacity}% 󱉞 "
+        "format-dead": "{capacity}% 󱉞 ",
+        "on-click": "python3 ~/.config/waybar/scripts/battery/batteryUI.py"
     },
     "power-profiles-daemon": {
         "format": "{icon}",

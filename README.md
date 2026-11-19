@@ -22,4 +22,11 @@ Updated for clean CachyOS install with no default DE.
     ```sh
     ./install_dots.sh
     ```
-    It creates a symlink of this repo files on the expected location (e.g. ~/.config). This way its possible to update the files direct in this repo with the git workflow without needing to recopy the files in every change. 
+    It creates a symlink of this repo files on the expected location (e.g. ~/.config). This way its possible to update the files direct in this repo with the git workflow without needing to recopy the files in every change.
+
+## Dependencies
+
+- `python-pyqt6`: Required for the Waybar battery UI (`waybar/scripts/battery/batteryUI.py`).
+    ```sh
+    sudo pacman -S --asexplicit python-pyqt6
+    ```

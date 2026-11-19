@@ -10,8 +10,6 @@ from PyQt6.QtCore import QEvent, Qt, QRect
 from PyQt6 import QtGui
 from multiprocessing import Process
 
-power_mode_changed = False
-
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -22,21 +20,13 @@ class MainWindow(QMainWindow):
         # Main layout
         main_layout = QVBoxLayout()
 
-        # Power profile for AC
-        ac_power_profile_layout = QHBoxLayout()
-        ac_label = QLabel("AC Power profile:")
-        ac_label.setStyleSheet("font-weight: bold; color: white;")
-        ac_button = PowerButton(power_source="AC")
-        ac_power_profile_layout.addWidget(ac_label)
-        ac_power_profile_layout.addWidget(ac_button)
-
-        # Power profile for BAT
-        bat_power_profile_layout = QHBoxLayout()
-        bat_label = QLabel("BAT Power profile:")
-        bat_label.setStyleSheet("font-weight: bold; color: white;")
-        bat_button = PowerButton(power_source="BAT")
-        bat_power_profile_layout.addWidget(bat_label)
-        bat_power_profile_layout.addWidget(bat_button)
+        # Power profile
+        power_profile_layout = QHBoxLayout()
+        power_label = QLabel("Power profile:")
+        power_label.setStyleSheet("font-weight: bold; color: white;")
+        power_button = PowerButton()
+        power_profile_layout.addWidget(power_label)
+        power_profile_layout.addWidget(power_button)
 
         # Conservation mode switch
         conservation_mode_layout = QHBoxLayout()
@@ -55,8 +45,7 @@ class MainWindow(QMainWindow):
         brightness_layout.addWidget(brightness_slider)
 
         # Add layouts to main layout
-        main_layout.addLayout(ac_power_profile_layout)
-        main_layout.addLayout(bat_power_profile_layout)
+        main_layout.addLayout(power_profile_layout)
         main_layout.addLayout(conservation_mode_layout)
         main_layout.addLayout(brightness_layout)
 
@@ -82,57 +71,43 @@ class MainWindow(QMainWindow):
                 self.close()
 
         return super().eventFilter(obj, event)
-    
-    def closeEvent(self, *args, **kwargs):
-        super().closeEvent(*args, **kwargs)
-        if power_mode_changed:
-            subprocess.run("sudo /usr/local/bin/restart_tlp.sh", shell=True, capture_output=True, text=True)
 
 
 class PowerButton(QPushButton):
-    def __init__(self, parent=None, power_source="AC"):
+    def __init__(self, parent=None):
         super().__init__(parent)
-        
-        self.power_profiles = ["performance", "balance_performance", "default", "balance_power", "power"]
+
+        self.power_profiles = ["performance", "balanced", "power-saver"]
         self.power_profiles_formatted = {
-            "performance": "Performance", 
-            "balance_performance": "Balance Performance", 
-            "default": "Balanced", 
-            "balance_power": "Balance Power Saver", 
-            "power": "Power Saver"
+            "performance": "Performance",
+            "balanced": "Balanced",
+            "power-saver": "Power Saver",
         }
         self.profile_colors = {
             "performance": "background-color: red; color: black;",
-            "balance_performance": "background-color: orange; color: black;",
-            "default": "background-color: blue; color: black;",
-            "balance_power": "background-color: yellow; color: black;",
-            "power": "background-color: green; color: black;"
+            "balanced": "background-color: blue; color: black;",
+            "power-saver": "background-color: green; color: black;",
         }
 
-        self.power_source = power_source
         self.current_power_profile = self.get_power_profile()
         self.setText(self.power_profiles_formatted[self.current_power_profile])
         self.setStyleSheet(self.profile_colors[self.current_power_profile])
         self.clicked.connect(self.button_clicked)
-    
-    def get_power_profile(self):
-        with open("/etc/tlp.conf", "r") as file:
-            for line in file:
-                if line.startswith("CPU_ENERGY_PERF_POLICY_ON_"+self.power_source):
-                    return line.split("=")[1].strip()
-        return "default"
-    
-    def button_clicked(self):
-        global power_mode_changed
-        power_mode_changed = True
 
+    def get_power_profile(self):
+        result = subprocess.run(["powerprofilesctl", "get"], capture_output=True, text=True)
+        profile = result.stdout.strip()
+        if profile in self.power_profiles:
+            return profile
+        return "balanced"
+
+    def button_clicked(self):
         index = self.power_profiles.index(self.current_power_profile)
         index = (index + 1) % len(self.power_profiles)
-        last_power_profile = self.current_power_profile
         self.current_power_profile = self.power_profiles[index]
         self.setText(self.power_profiles_formatted[self.current_power_profile])
         self.setStyleSheet(self.profile_colors[self.current_power_profile])
-        subprocess.run("sudo /usr/local/bin/change_power_mode.sh "+self.power_source+" "+last_power_profile+" "+self.current_power_profile, shell=True, capture_output=True, text=True)
+        subprocess.run(["powerprofilesctl", "set", self.current_power_profile], capture_output=True, text=True)
 
 
 class ConservativeModeSwitch(QPushButton):
